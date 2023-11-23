@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{5A6E8400-BFC9-4183-8E62-E2C3D3F7F879}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ImageAuthenticationSystem/Pages/GridImageAuthentication.cshtml">
+    <Files>
+      <File FileName="ImageAuthenticationSystem/Pages/Index.cshtml" Line="150" Column="11" />
+      <File FileName="ImageAuthenticationSystem/Pages/RandomImageAuthentication.cshtml" Line="173" Column="1" />
+      <File FileName="ImageAuthenticationSystem/Pages/GridImageAuthentication.cshtml" Line="259" Column="1" />
+      <File FileName="ImageAuthenticationSystem/Pages/SurveyList.cshtml" Line="169" Column="35" />
+      <File FileName="ImageAuthenticationSystem/Pages/RandomImageSelection.cshtml" Line="86" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ImageAuthenticationSystem" expanded="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.ImageAuthenticationSystem PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

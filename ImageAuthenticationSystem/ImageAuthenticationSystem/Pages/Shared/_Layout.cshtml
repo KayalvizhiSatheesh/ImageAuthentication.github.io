@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IMAGE AUTHENTICATION SYSTEM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/allMin.css" />
+    <link rel="stylesheet" href="~/css/googleapis.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ImageAuthenticationSystem.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/MasteCss.css" asp-append-version="true" />
+    <meta name="description" content="">
+    <link rel="icon" href="~/Resource/HomeImage.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="~/Resource/HomeImage.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="~/Resource/HomeImage.png" sizes="180x180">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IMAGE AUTHENTICATION SYSTEM">
+    <meta property="og:image" content="https://iastest123.my.canva.site/home/ae73d71dcad26b90e584a5cf39aa9370.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <header>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+@* 
+    <footer class="border-top footer text-muted">
+        <div class="footer-overflow-container">
+            <div class="footer-container">
+                &copy; 2023 - ImageAuthenticationSystem
+            </div>
+        </div>
+    </footer> *@
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

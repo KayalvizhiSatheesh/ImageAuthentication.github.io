@@ -1,0 +1,240 @@
+﻿@page
+@model RandomImageSelection
+@{
+    ViewData["Title"] = "Random Image Selection";
+}
+
+<style media="screen">
+    .riaMethod {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('~/Resource/HomeImage.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .giaMethod {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('~/Resource/HomeImage.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .button {
+        margin-top: 50px;
+        width: 100%;
+        background-color: #080710;
+        color: #ffffff;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .imageDiv {
+        padding: 10px;
+        float: left
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+        gap: 5px; /* Adjust the gap between grid items */
+    }
+
+    .grid-item {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%; /* Maintain aspect ratio for square grid items */
+        overflow: hidden;
+    }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .grid-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .grid-item img.highlighted {
+        border: 6px solid #ffffff;
+    }
+
+    .highlighted {
+        border: 6px solid #ffffff;
+    }
+
+    .btnVisible {
+        visibility: hidden;
+    }
+
+    .container {
+        display: flex;
+    }
+
+        .container > div {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+    .button {
+        margin-top: 50px;
+        width: 50%;
+        background-color: #080710;
+        color: #ffffff;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<html lang="en-IN" style="--inner1Vh: 3.61px; --sbw: 0px;">
+
+<body>
+    <div id="root">
+        <div>
+            <div style="text-align:center">
+                <h2>Random Image Authentication</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div style="float: left; text-align: center">
+                <h4 style="text-align:center">Selected any three Images</h4>
+                <div class="grid-container" id="gridContainer">
+                    <table id="tblImage" style="width:300px; height:350px"></table>
+                    <!-- JavaScript will populate this container with grid items -->
+                </div>
+            </div>
+            <div style="float:left; text-align:center">
+                <h4 style="text-align:center">Selected Images</h4>
+                <div style="text-align:center">
+                    <table id="tblImageSelected" style="display: inline-block;"></table>
+                </div>
+                <div onclick="redirectToImageAuthentication()">
+                    <a class="button btnVisible" id="btnSetImage">Set Password</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const gridContainer = document.getElementById('gridContainer');
+
+            function redirectToImageAuthentication() {
+                const selectedClassName = 'highlighted';
+                const selectedCells = gridContainer.querySelectorAll(`.${selectedClassName}`);
+
+                const selectedImageNames = Array.from(selectedCells).map(imgElement => {
+                    return imgElement && imgElement.hasAttribute('src') ? imgElement.getAttribute('src') : null;
+                }).filter(imageName => imageName !== null);
+
+                sessionStorage.setItem('randomSelectedImages', JSON.stringify(selectedImageNames));
+                window.location.href = '/RandomImageAuthentication';
+            }
+
+            function splitImageIntoGrids() {
+                
+                const imagePath = `/Resource/RIA`;
+
+                const rows = 4;
+                const cols = 3;
+                let count = 1;
+
+                const table = document.getElementById('tblImage');
+
+                for (let row = 0; row < rows; row++) {
+                    const newRow = table.insertRow();
+                    for (let col = 0; col < cols; col++) {
+
+                        const newCell = newRow.insertCell();
+
+                        const img = document.createElement('img');
+                        img.src = `${imagePath}/${count}.png`; // Use the same image for all grid items
+                        img.classList.add('grid-image');
+                        img.addEventListener('click', function () {
+                            toggleHighlight(this); // Toggle highlight on click
+                        });
+                        newCell.appendChild(img);
+                        count++;
+                    }
+                }
+            }
+
+            function removeItemFromList(img) {
+                const table = document.getElementById('tblImageSelected');
+                const selectedImages = table.querySelectorAll('.selected-image');
+
+                // Find and remove the corresponding item from the list
+                selectedImages.forEach((selectedImage) => {
+                    if (selectedImage.querySelector('img').src === img.src) {
+                        selectedImage.remove();
+                    }
+                });
+                const btnSetImage = document.getElementById('btnSetImage');
+                btnSetImage.classList.add('btnVisible');
+            }
+
+            function toggleHighlight(img) {
+                const selectedClassName = 'highlighted';
+                const btnVisibleClassName = 'btnVisible';
+                if (img.classList.contains(selectedClassName)) {
+                    img.classList.remove(selectedClassName); // Unselect if already selected
+                    removeItemFromList(img);
+                } else {
+                    // Check if the maximum allowed cells are already selected
+                    const selectedCells = gridContainer.querySelectorAll(`.${selectedClassName}`);
+
+                    if (selectedCells.length < 3) {
+                        img.classList.add(selectedClassName); // Highlight the cell
+
+                        // Clone the img element
+                        const imgClone = img.cloneNode(true);
+
+                        // Create a new div element to contain the cloned img
+                        const containerDiv = document.createElement('div');
+                        containerDiv.classList.add('selected-image');
+
+                        // Append the cloned img to the container div
+                        containerDiv.appendChild(imgClone);
+
+                        // Append the container div to the table
+                        const table = document.getElementById('tblImageSelected');
+                        table.appendChild(containerDiv);
+
+                        if (selectedCells.length == 2) {
+                            const btnSetImage = document.getElementById('btnSetImage');
+                            btnSetImage.classList.remove(btnVisibleClassName);
+                        }
+                        else {
+                            btnSetImage.classList.add(btnVisibleClassName);
+                        }
+                    }
+
+                }
+            }
+
+            splitImageIntoGrids();
+        </script>
+    </div>
+</body>
+
+</html>
