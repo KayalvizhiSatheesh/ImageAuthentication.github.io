@@ -1,0 +1,96 @@
+﻿
+
+<html lang="en-IN" style="--inner1Vh: 3.61px; --sbw: 0px;">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIA Image Selection</title>
+    <link rel="stylesheet" href="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="wwwroot/css/allMin.css" />
+    <link rel="stylesheet" href="wwwroot/css/googleapis.css" />
+    <link rel="stylesheet" href="wwwroot/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="wwwroot/ImageAuthenticationSystem.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="wwwroot/css/MasteCss.css" asp-append-version="true" />
+    <meta name="description" content="">
+    <link rel="icon" href="wwwroot/Resource/HomeImage.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="wwwroot/Resource/HomeImage.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="wwwroot/Resource/HomeImage.png" sizes="180x180">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IMAGE AUTHENTICATION SYSTEM">
+    <meta property="og:image" content="https://iastest123.my.canva.site/home/ae73d71dcad26b90e584a5cf39aa9370.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <style media="screen">
+        .riaMethod {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('~/Resource/HomeImage.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .giaMethod {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('~/Resource/HomeImage.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #080710;
+            color: #ffffff;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .imageDiv {
+            padding: 10px;
+            float: left
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div>
+            <div style="text-align:center">
+                <h2>Grid-Divided Image Authentication</h2>
+                <h4>Select any one Image</h4>
+            </div>
+            <div>
+                <div class="imageDiv" onclick="redirectToGrid('FirstGIA')">
+                    <img src="wwwroot/Resource/FirstGIA.png" width="350" height="500">
+                </div>
+                <div class="imageDiv" onclick="redirectToGrid('SecoundGIA')">
+                    <img src="wwwroot/Resource/SecoundGIA.png" width="350" height="500">
+                </div>
+                <div class="imageDiv" onclick="redirectToGrid('ThirdGIA')">
+                    <img src="wwwroot/Resource/ThirdGIA.png" width="350" height="500">
+                </div>
+            </div>
+        </div>
+        <script>function redirectToGrid(imageName) {
+                // Pass the selected image name to the next page
+                window.location.href = 'GridImageSplit.html' + '?imageName=' + imageName;
+            }</script>
+    </div>
+</body>
+</html>

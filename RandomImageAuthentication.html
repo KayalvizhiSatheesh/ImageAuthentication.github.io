@@ -1,0 +1,261 @@
+﻿<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RIA Authentication Page</title>
+    <link rel="stylesheet" href="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="wwwroot/css/allMin.css" />
+    <link rel="stylesheet" href="wwwroot/css/googleapis.css" />
+    <link rel="stylesheet" href="wwwroot/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="wwwroot/ImageAuthenticationSystem.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="wwwroot/css/MasteCss.css" asp-append-version="true" />
+    <meta name="description" content="">
+    <link rel="icon" href="wwwroot/Resource/HomeImage.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="wwwroot/Resource/HomeImage.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="wwwroot/Resource/HomeImage.png" sizes="180x180">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IMAGE AUTHENTICATION SYSTEM">
+    <meta property="og:image" content="https://iastest123.my.canva.site/home/ae73d71dcad26b90e584a5cf39aa9370.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        form {
+            background-color: rgba(255,255,255,0.13);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #000000;
+            padding: 10px 35px;
+            text-align: center;
+        }
+
+            form * {
+                font-family: 'Poppins',sans-serif;
+                color: #000000;
+                letter-spacing: 0.5px;
+                outline: none;
+                border: none;
+            }
+
+        ::placeholder {
+            color: #e5e5e5;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+            gap: 5px; /* Adjust the gap between grid items */
+        }
+
+        .grid-item {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* Maintain aspect ratio for square grid items */
+            overflow: hidden;
+        }
+
+            .grid-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .grid-image {
+            width: 100px;
+            height: 100px;
+        }
+
+        .grid-item img.highlighted {
+            border: 6px solid #0074ff;
+        }
+
+        .highlighted {
+            border: 5px solid #ffffff;
+        }
+
+        .btnVisible {
+            visibility: hidden;
+        }
+
+        .button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #080710;
+            color: #ffffff;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+        }
+
+            /* Additional styling for clarity */
+            .container > div {
+                flex: 1;
+                border: 1px solid #ccc;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+        .lblInvalid {
+            color: red;
+        }
+
+        .lblValid {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div style="height:10px"></div>
+        <form>
+            <h2>Login</h2>
+        </form>
+        <div style="height:10px"></div>
+        <div class="container">
+            <div style="float: left; text-align: center">
+                <h4 style="text-align:center">Select Your Password Image</h4>
+                <div class="grid-container" id="gridContainer">
+                    <table id="tblImage" style="width:300px; height:350px"></table>
+                    <!-- JavaScript will populate this container with grid items -->
+                </div>
+            </div>
+            <div style="float:left; text-align:center">
+                <h4 style="text-align:center">Selected Images</h4>
+                <div style="text-align:center">
+                    <table id="tblImageSelected" style="display: inline-block;"></table>
+                </div>
+                <div>
+                    <a class="button btnVisible" id="btnLogin" onclick="RandomAuthentication()">Login</a>
+                </div>
+                <label id="lblStatus" for="status"></label>
+                <div>
+                    <a  href="GridImageSelection.html" class="button btnVisible" id="btnSurvey">Enter Method 2</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>const urlParams = new URLSearchParams(window.location.search);
+
+    const lblStatus = document.getElementById('lblStatus');
+    const gridContainer = document.getElementById('gridContainer');
+
+    function RandomAuthentication() {
+        const selectedClassName = 'highlighted';
+        const selectedCells = gridContainer.querySelectorAll(`.${selectedClassName}`);
+        const btnVisibleClassName = 'btnVisible';
+        const btnSurvey = document.getElementById('btnSurvey');
+        const btnLogin = document.getElementById('btnLogin');
+
+        const selectedImageNames = Array.from(selectedCells).map(imgElement => {
+            return imgElement && imgElement.hasAttribute('src') ? imgElement.getAttribute('src') : null;
+        }).filter(imageName => imageName !== null);
+
+        const randomSelectedImages = JSON.parse(sessionStorage.getItem('randomSelectedImages'));
+
+        if (JSON.stringify(selectedImageNames) === JSON.stringify(randomSelectedImages)) {
+            lblStatus.classList.remove('lblInvalid')
+            lblStatus.classList.add('lblValid');
+            lblStatus.innerText = "Login Succesfull!";
+            btnSurvey.classList.remove(btnVisibleClassName);
+        }
+        else {
+            lblStatus.classList.remove('lblValid')
+            lblStatus.classList.add('lblInvalid')
+            lblStatus.innerText = "Login Failed!";
+        }
+    }
+
+    function splitImageIntoGrids() {
+        const imagePath = `wwwroot/Resource/RIA`;
+
+        // Number of rows and columns in the grid
+        const rows = 4;
+        const cols = 3;
+        let count = 1;
+
+        const table = document.getElementById('tblImage');
+
+        for (let row = 0; row < rows; row++) {
+            const newRow = table.insertRow();
+            for (let col = 0; col < cols; col++) {
+
+                const newCell = newRow.insertCell();
+
+                const img = document.createElement('img');
+                img.src = `${imagePath}/${count}.png`; // Use the same image for all grid items
+                img.classList.add('grid-image');
+                img.addEventListener('click', function () {
+                    toggleHighlight(this); // Toggle highlight on click
+                });
+                newCell.appendChild(img);
+                count++;
+            }
+        }
+    }
+
+    function removeItemFromList(img) {
+        const table = document.getElementById('tblImageSelected');
+        const selectedImages = table.querySelectorAll('.selected-image');
+
+        selectedImages.forEach((selectedImage) => {
+            if (selectedImage.querySelector('img').src === img.src) {
+                selectedImage.remove();
+            }
+        });
+    }
+
+    function toggleHighlight(img) {
+        const selectedClassName = 'highlighted';
+        const btnVisibleClassName = 'btnVisible';
+        const btnLogin = document.getElementById('btnLogin');
+        lblStatus.innerText = "";
+
+        if (img.classList.contains(selectedClassName)) {
+            img.classList.remove(selectedClassName); // Unselect if already selected
+            btnLogin.classList.add(btnVisibleClassName);
+            removeItemFromList(img);
+        } else {
+            // Check if the maximum allowed cells are already selected
+            const selectedCells = gridContainer.querySelectorAll(`.${selectedClassName}`);
+
+            if (selectedCells.length < 3) {
+                img.classList.add(selectedClassName); // Highlight the cell
+
+                // Clone the img element
+                const imgClone = img.cloneNode(true);
+
+                // Create a new div element to contain the cloned img
+                const containerDiv = document.createElement('div');
+                containerDiv.classList.add('selected-image');
+
+                // Append the cloned img to the container div
+                containerDiv.appendChild(imgClone);
+
+                // Append the container div to the table
+                const table = document.getElementById('tblImageSelected');
+                table.appendChild(containerDiv);
+
+                if (selectedCells.length == 2) {
+                    btnLogin.classList.remove(btnVisibleClassName);
+                }
+                else {
+                    btnLogin.classList.add(btnVisibleClassName);
+                }
+            }
+
+        }
+    }
+
+    // Call the function with the provided image name
+    splitImageIntoGrids();</script>
