@@ -92,6 +92,18 @@
             cursor: pointer;
         }
 
+            .button:hover {
+                background-color: #ffffff;
+                color: #080710;
+            }
+
+        @media screen and (max-width: 768px) {
+            .button {
+                font-size: 14px;
+                padding: 12px 0;
+            }
+        }
+
         .container {
             display: flex;
         }
@@ -122,7 +134,7 @@
         <div style="height:10px"></div>
         <div class="container">
             <div style="float: left; text-align: center">
-                <h4 style="text-align:center">Select Your Password Image</h4>
+                <h4 style="text-align:center">Select Any 3 Section of a Image</h4>
                 <div class="grid-container" id="gridContainer">
                     <table id="tblImage" style="width:300px; height:350px"></table>
                     <!-- JavaScript will populate this container with grid items -->
@@ -138,7 +150,7 @@
                 </div>
                 <label id="lblStatus" for="status"></label>
                 <div>
-                    <a  href="GridImageSelection.html" class="button btnVisible" id="btnSurvey">Enter Method 2</a>
+                    <a href="GridImageSelection.html" class="button btnVisible" id="btnSurvey">Enter Method 2</a>
                 </div>
             </div>
         </div>

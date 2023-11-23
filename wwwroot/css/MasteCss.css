@@ -252,6 +252,10 @@ img {
         font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.40888889em - var(--ffsd)));
     }
 
+    #aG6MhkftSsSIxo6k {
+        font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.40888889em - var(--ffsd)));
+    }
+
     #J9vstOEeVI0xFU7N {
         --first-font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), 4.40888889em);
         --last-font-size: var(--first-font-size);

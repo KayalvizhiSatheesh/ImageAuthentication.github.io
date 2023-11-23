@@ -62,8 +62,8 @@
         }
 
         form {
-            height: 340px;
-            width: 400px;
+            height: 400px;
+            width: 500px;
             background-color: rgba(255,255,255,0.13);
             position: absolute;
             transform: translate(-50%,-50%);
@@ -142,6 +142,18 @@
             cursor: pointer;
         }
 
+            .button:hover {
+                background-color: #ffffff;
+                color: #080710;
+            }
+
+        @media screen and (max-width: 768px) {
+            .button {
+                font-size: 14px;
+                padding: 12px 0;
+            }
+        }
+
         .social {
             margin-top: 30px;
             display: flex;
@@ -168,9 +180,20 @@
             .social i {
                 margin-right: 4px;
             }
+
+        .pFontSize {
+            font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(0.9888889em - var(--ffsd)));
+            color: #ffffff;
+            direction: ltr;
+            font-family: YAFdJt8dAY0-0;
+            margin-left: 0em;
+            line-height: 1.5em;
+            text-transform: none;
+            letter-spacing: 0em;
+            text-align: justify;
+        }
     </style>
 </head>
-
 
 <body>
     <div class="background">
@@ -179,9 +202,13 @@
     </div>
     <form>
         <h4>IMAGE AUTHENTICATION SYSTEM</h4>
-        <h5>SURVEY</h5>
-
-        <label id="lblStatus" style="color:red"></label>
+        <h5 style="font-size:medium">SURVEY</h5>
+        <p class="pFontSize">
+            <span id="ofIHpIvWuKVdoLip" style="color:#ffffff;">
+                Welcome to our Image Authentication Methods Survey! Image authentication is an alternative to traditional password systems, using images as unique identifiers for user access instead of alphanumeric passwords. We're comparing two approaches to identify the more user-friendly option. Share your experiences with Methods 1 and 2, focusing on ease of use and efficiency. Your feedback will shape improvements. Thank you for contributing to our research!
+            </span>
+            <br>
+        </p>
         <a href="SurveyList.html" class="button" id="idButtonRIa">Enter</a>
     </form>
 </body>
