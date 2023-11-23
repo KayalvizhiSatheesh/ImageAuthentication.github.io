@@ -75,7 +75,7 @@
         }
 
         .highlighted {
-            border: 5px solid #ffffff;
+            border: 5px solid rgba(0, 0, 0, 0.45);
         }
 
         .btnVisible {
@@ -95,8 +95,7 @@
         }
 
             .button:hover {
-                background-color: #ffffff;
-                color: #080710;
+                background-color: rgba(0, 0, 0, 0.45);
             }
 
         @media screen and (max-width: 768px) {
@@ -171,6 +170,7 @@
     const imageName = urlParams.get('imageName');
     const lblStatus = document.getElementById('lblStatus');
     const gridContainer = document.getElementById('gridContainer');
+    const btnVisibleClassName = 'btnVisible';
 
     function EnterSurvey() {
         window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeQfgsX655xgwwjCKrpBvgTYggT4G0hG8I9MU3yAlwQ0A70wg/viewform';
@@ -179,7 +179,7 @@
     function GridAuthentication() {
         const selectedClassName = 'highlighted';
         const selectedCells = gridContainer.querySelectorAll(`.${selectedClassName}`);
-        const btnVisibleClassName = 'btnVisible';
+       
         const btnSurvey = document.getElementById('btnSurvey');
         const btnLogin = document.getElementById('btnLogin');
 
@@ -242,44 +242,48 @@
     }
 
     function toggleHighlight(img) {
-        const selectedClassName = 'highlighted';
-        const btnVisibleClassName = 'btnVisible';
-        const btnLogin = document.getElementById('btnLogin');
-        lblStatus.innerText = "";
+        var btnSurvey = document.getElementById('btnSurvey');
 
-        if (img.classList.contains(selectedClassName)) {
-            img.classList.remove(selectedClassName); // Unselect if already selected
-            btnLogin.classList.remove(btnVisibleClassName);
-            removeItemFromList(img);
-        } else {
-            // Check if the maximum allowed cells are already selected
-            const selectedCells = gridContainer.querySelectorAll(`.${selectedClassName}`);
+        if (btnSurvey.classList.contains(btnVisibleClassName)) {
 
-            if (selectedCells.length < 3) {
-                img.classList.add(selectedClassName); // Highlight the cell
+            const selectedClassName = 'highlighted';
+            const btnLogin = document.getElementById('btnLogin');
+            lblStatus.innerText = "";
 
-                // Clone the img element
-                const imgClone = img.cloneNode(true);
+            if (img.classList.contains(selectedClassName)) {
+                img.classList.remove(selectedClassName); // Unselect if already selected
+                btnLogin.classList.add(btnVisibleClassName);
+                removeItemFromList(img);
+            } else {
+                // Check if the maximum allowed cells are already selected
+                const selectedCells = gridContainer.querySelectorAll(`.${selectedClassName}`);
 
-                // Create a new div element to contain the cloned img
-                const containerDiv = document.createElement('div');
-                containerDiv.classList.add('selected-image');
+                if (selectedCells.length < 3) {
+                    img.classList.add(selectedClassName); // Highlight the cell
 
-                // Append the cloned img to the container div
-                containerDiv.appendChild(imgClone);
+                    // Clone the img element
+                    const imgClone = img.cloneNode(true);
 
-                // Append the container div to the table
-                const table = document.getElementById('tblImageSelected');
-                table.appendChild(containerDiv);
+                    // Create a new div element to contain the cloned img
+                    const containerDiv = document.createElement('div');
+                    containerDiv.classList.add('selected-image');
 
-                if (selectedCells.length == 2) {
-                    btnLogin.classList.remove(btnVisibleClassName);
+                    // Append the cloned img to the container div
+                    containerDiv.appendChild(imgClone);
+
+                    // Append the container div to the table
+                    const table = document.getElementById('tblImageSelected');
+                    table.appendChild(containerDiv);
+
+                    if (selectedCells.length == 2) {
+                        btnLogin.classList.remove(btnVisibleClassName);
+                    }
+                    else {
+                        btnLogin.classList.add(btnVisibleClassName);
+                    }
                 }
-                else {
-                    btnLogin.classList.add(btnVisibleClassName);
-                }
+
             }
-
         }
     }
 
